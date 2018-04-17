@@ -36,7 +36,8 @@
           url_for('/staff/subjects/show.php?id=' . h(u($subject['id']))); ?>">View</a></td>
           <td><a class="action" href="<?php echo 
           url_for('/staff/subjects/edit.php?id=' . h(u($subject['id']))); ?>">Edit</a></td>
-          <td><a class="action" href="">Delete</a></td>
+          <td><a class="action" href="<?php echo 
+          url_for('/staff/subjects/delete.php?id=' . h(u($subject['id']))); ?>">Delete</a></td>
     	  </tr>
       <?php } ?>
   	</table>
