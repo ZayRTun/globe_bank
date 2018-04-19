@@ -9,7 +9,7 @@ $id = $_GET['id'];
 
 
 
-if (is_post_request()) {
+if (is_post_request()) { 
 
   $subject = [];
   $subject['id'] = $id;
@@ -18,7 +18,14 @@ if (is_post_request()) {
   $subject['visible'] = $_POST['visible'] ?? '';
 
   $result = update_subject($subject);
-  redirect_to(url_for('/staff/subjects/show.php?id=' . $id));
+
+  if($result === true) {
+    redirect_to(url_for('/staff/subjects/show.php?id=' . $id));
+  } else {
+    $errors = $result;
+    var_dump($errors);
+  }
+
 } else {
 
   $subject = find_subject_by_id($id);   
