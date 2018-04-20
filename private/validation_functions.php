@@ -97,8 +97,8 @@
     global $db;
 
     $sql = "SELECT * FROM pages ";
-    $sql .= "WHERE menu_name='" . $menu_name . "' ";
-    $sql .= "AND id != '" . $current_id . "'";
+    $sql .= "WHERE menu_name='" . db_scape($db, $menu_name) . "' ";
+    $sql .= "AND id != '" . db_scape($db, $current_id) . "'";
 
     $page_set = mysqli_query($db, $sql);
     $page_count = mysqli_num_rows($page_set);
