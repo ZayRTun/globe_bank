@@ -86,7 +86,7 @@ mysqli_free_result($page_set);
     <dl>
       <dt>Content</dt>
       <dd>
-        <input type="text" name="content" value="" />
+      <textarea name="content" cols="60" rows="10"><?php echo h($page['content']); ?></textarea>
       </dd>
     </dl>
     <div id="operations">
