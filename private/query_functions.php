@@ -296,4 +296,54 @@ function find_pages_by_subject_id($subject_id, $options=[]) {
   return $result;
 }
 
+//Admins
+
+function find_all_admins($option=[]) {
+  global $db;
+
+  $sql = "SELECT * FROM admins ";
+  $sql .= "ORDER BY username ASC";
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  return $result;
+}
+
+function find_admin_by_id($id) {
+  global $db;
+
+  $sql = "SELECT * FROM admins ";
+  $sql .= "WHERE id= '" . db_scape($db, $id) . "'";
+  $result = mysqli_query($db, $sql);
+  confirm_result_set($result);
+  $admin = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  return $admin;
+}
+
+function update_admin($admin) {
+  global $db;
+
+  $sql = "UPDATE admins SET ";
+  $sql .= "first_name='" . db_scape($db, $admin['first_name']) . "', ";
+  $sql .= "last_name='" . db_scape($db, $admin['last_name']) . "', ";
+  $sql .= "email='" . db_scape($db, $admin['email']) . "', ";
+  $sql .= "username='" . db_scape($db, $admin['username']) . "', ";
+  $sql .= "hashed_password='" . db_scape($db, $admin['hashed_password']) . "' ";
+  $sql .= "WHERE id='" . db_scape($db, $admin['id']) . "' ";
+  $sql .= "LIMIT 1";
+
+  $result = mysqli_query($db, $sql);
+
+  if ($result) {
+    return true;
+  } else {
+    echo mysqli_error($db);
+    db_disconnect($db);
+    exit;
+  }
+
+}
+
+
+
 ?>
