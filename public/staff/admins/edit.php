@@ -1,6 +1,8 @@
 <?php 
   require_once('../../../private/initialize.php');
 
+  require_login();
+
   if (!isset($_GET["id"])) {
     redirect_to(url_for('/staff/admins/index.php'));
   }
@@ -14,11 +16,13 @@
     $admin['last_name'] = $_POST["last_name"] ?? '';
     $admin['email'] = $_POST["email"] ?? '';
     $admin['username'] = $_POST["username"] ?? '';
-    $admin['hashed_password'] = $_POST["hashed_password"] ?? '';
+    $admin['password'] = $_POST["password"] ?? '';
+    $admin['confirm_password'] = $_POST["confirm_password"] ?? '';
 
     $result = update_admin($admin);
 
     if ($result === true) {
+      $_SESSION["message"] = 'Admin updated.';
       redirect_to(url_for('/staff/admins/show.php?id=' . $id));
     } else {
       $errors = $result;
@@ -60,7 +64,11 @@
       </dl>
       <dl>
         <dt>Password</dt>
-        <dd><input type="text" name="hashed_password" value="<?php echo h($admin['hashed_password']); ?>"></dd>
+        <dd><input type="password" name="hashed_password"value="" /></dd>
+      </dl>
+      <dl>
+        <dt>Confirm Password</dt>
+        <dd><input type="password" name="confirm_password" value="" /></dd>
       </dl>
       <div id="operations">
         <input type="submit" value="Edit Admin" />

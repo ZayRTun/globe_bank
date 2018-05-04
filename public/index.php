@@ -6,7 +6,8 @@
 
 $preview = false;
 if(isset($_GET['preview'])) {
-  $preview = $_GET["preview"] == 'true' ? true : false;
+  // previewing should require admin to be logged in
+  $preview = $_GET["preview"] == 'true' && is_logged_in() ? true : false;
 }
 $visible = !$preview;
 

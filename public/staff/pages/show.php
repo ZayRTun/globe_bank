@@ -1,9 +1,13 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
 <?php 
+
+  require_login();
+
   $id = $_GET['id'] ?? '1';
 
   $page = find_page_by_id($id);
+  $subject = find_subject_by_id($page['subject_id']);
 
 ?>
 
@@ -12,7 +16,7 @@
 
 <div id="content">
 
-  <a href="<?php echo url_for('/staff/pages/index.php'); ?>" class="back-link">&laquo; Back to List</a>
+  <a href="<?php echo url_for('/staff/subjects/show.php?id=' . h(u($subject['id']))); ?>" class="back-link">&laquo; Back to Subject Page</a>
 
   <div class="page show">
 
@@ -23,7 +27,6 @@
     </div>
 
     <div class="attributes">
-      <?php $subject = find_subject_by_id($page['subject_id']); ?>
       <dl>
         <dt>Subject</dt>
         <dd><?php echo h($subject['menu_name']); ?></dd>

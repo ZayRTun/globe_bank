@@ -1,5 +1,7 @@
 <?php require_once('../../../private/initialize.php'); ?>
 
+<?php require_login(); ?> 
+
 <?php 
   $admin_set = find_all_admins();
 ?>
@@ -18,11 +20,10 @@
     <table class="list">
       <tr>
         <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
+        <th>First</th>
+        <th>Last</th>
         <th>Email</th>
         <th>Username</th>
-        <th>Password</th>
         <th>&nbsp;</th>
   	    <th>&nbsp;</th>
         <th>&nbsp;</th>
@@ -35,7 +36,6 @@
           <td><?php echo $admin['last_name']; ?></td>
           <td><?php echo $admin['email']; ?></td>
           <td><?php echo $admin['username']; ?></td>
-          <td><?php echo $admin['hashed_password']; ?></td>
           <td><a href="<?php echo url_for('/staff/admins/show.php?id=' . h(u($admin['id']))); ?>" class="action">View</a></td>
           <td><a href="<?php echo url_for('/staff/admins/edit.php?id=' . h(u($admin['id']))); ?>" class="action">Edit</a></td>
           <td><a href="<?php echo url_for('/staff/admins/delete.php?id=' . h(u($admin['id']))); ?>" class="action">Delete</a></td>

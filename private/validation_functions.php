@@ -97,8 +97,8 @@
     global $db;
 
     $sql = "SELECT * FROM pages ";
-    $sql .= "WHERE menu_name='" . db_scape($db, $menu_name) . "' ";
-    $sql .= "AND id != '" . db_scape($db, $current_id) . "'";
+    $sql .= "WHERE menu_name='" . db_escape($db, $menu_name) . "' ";
+    $sql .= "AND id != '" . db_escape($db, $current_id) . "'";
 
     $page_set = mysqli_query($db, $sql);
     $page_count = mysqli_num_rows($page_set);
@@ -107,4 +107,17 @@
     return $page_count === 0;
   }
 
+  function has_unique_username($username, $current_id="0") {
+    global $db;
+
+    $sql = "SELECT * FROM admins ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+    $sql .= "AND id != '" . db_escape($db, $current_id) . "'";
+
+    $page_set = mysqli_query($db, $sql);
+    $page_count = mysqli_num_rows($page_set);
+    mysqli_free_result($page_set);
+
+    return $page_count === 0;
+  }
 ?>
